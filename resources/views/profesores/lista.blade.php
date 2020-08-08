@@ -12,19 +12,21 @@
         <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet"> 
         <script src="https:////cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"> </script>
         
-
         <link rel="stylesheet" href="/css/font-awesome.css"/>
         <link rel="stylesheet" href="/css/estilos.css"/>
 
-        <title>Registrados</title>
-
-        
-
+        <title class="titleSection">Registrados</title>
     </head>
 
     <body>
 
        <h1 class="titleSection">Profesores Registrados</h1>
+
+       @php($c=count($registros))
+       @if($c==0)
+
+       <h1 class="subtitleSection">No existen usuarios registrados</h1>
+       @else
 
         <div class='tabla'>
             <div class="table-responsive">
@@ -76,6 +78,7 @@
             </div>
         </div>
         <!---->
+        @endif
 
         <script>
             
@@ -87,7 +90,8 @@
 
             span.onclick = function() {
                 //modal.style.display = "none";
-                location.href = "http://localhost:8001/registro"
+                //location.href = "http://localhost:8001/registro"
+                location.href = "{{route('registro')}}"
             }
 
             window.onclick = function(event) {
@@ -103,8 +107,7 @@
 
                 cont = id
                
-                var token = document.getElementById('token').value
-            
+                var token = document.getElementById('token').value  
                 var id_user = document.getElementById('modal_Btn-'+cont+'').getAttribute('data-id')
 
                 $.ajaxSetup({
@@ -113,9 +116,8 @@
                     }
                 });
  
-
                 console.log(id_user)
-                    //ajax
+                   
                 $.ajax({
                         url:"{{route('delete')}}",
                         type: "Post",
@@ -140,8 +142,6 @@
 
                                 eliminado.innerHTML='Ocurrió un error :c'
                             }
-                            
-            
                         },
                     
                         error: function (xhr, status, errorThrown) {
@@ -157,7 +157,6 @@
                             }
                         }
                     });//fin_ajax
-
             }
 
             //**fin_MODAL**//
@@ -165,8 +164,19 @@
             $(document).ready(function() {
                 
                 var table = $('#myTable').DataTable({
-                    "lengthMenu": [[6, -1], [6, "All"]],
-                    searching:false
+                    "lengthMenu": [[6, -1], [6, "todos"]],
+                    searching:false,
+                    "language": {
+                        "lengthMenu": "ver _MENU_ registros por página",
+                        "zeroRecords": "Usuario no encontrado",
+                        "info": "Mostrando página _PAGE_ de _PAGES_",
+                        "infoEmpty": "No existen usuarios registrados",
+                        "infoFiltered": "(filtered from _MAX_ total records)",
+                        "paginate": {
+                            "previous": "página previa",
+                            "next":"página siguiente"
+                        }
+                    }
                 });
 
             });
@@ -174,3 +184,4 @@
         </script>
     </body> 
 </html>
+

@@ -8,6 +8,12 @@ use App\Profesor;
 
 class ProfesoresController extends Controller
 {
+    public function vista(){
+
+        return view('profesores.vista');
+
+    }
+
     public function show(){
 
         $client = new Client();
@@ -86,3 +92,6 @@ class ProfesoresController extends Controller
 
     }
 }
+
+
+

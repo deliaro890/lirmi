@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/registro','ProfesoresController@show');
+
+Route::get('/','ProfesoresController@vista');
+
+Route::get('/registro','ProfesoresController@show')->name('registro');
 Route::post('/insert','ProfesoresController@insert')->name('insert');
 Route::get('/lista','ProfesoresController@lista')->name('lista');
 Route::post('/delete','ProfesoresController@delete')->name('delete');

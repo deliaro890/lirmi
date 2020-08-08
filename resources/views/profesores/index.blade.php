@@ -16,9 +16,8 @@
         <link rel="stylesheet" href="/css/font-awesome.css"/>
         <link rel="stylesheet" href="/css/estilos.css"/>
 
+       
         <title>Profesores</title>
-
-        
 
     </head>
 
@@ -60,12 +59,12 @@
 
                                                     <div class='avatar'><img src='{{$registro->avatar}}'></div>
                                                     <div class='info'>
-                                                    {{csrf_field()}}
-                                                    <input type="hidden" id='token' name="_token" value="{{csrf_token()}}"/>
+                                                        {{csrf_field()}}
+                                                        <input type="hidden" id='token' name="_token" value="{{csrf_token()}}"/>
 
-                                                        <p class='nombre'>{{$registro->first_name}}</p>
-                                                        <p class='apellido'>{{$registro->last_name}}</p>
-                                                        <p class='email'>{{$registro->email}}</p>
+                                                            <p class='nombre dato_'>{{$registro->first_name}}</p>
+                                                            <p class='apellido dato_'>{{$registro->last_name}}</p>
+                                                            <p class='email dato_'>{{$registro->email}}</p>
                                                     </div>
 
                                                 </div>
@@ -91,7 +90,7 @@
             </div>
         </div>
 
-        <a href="{{route('lista')}}" class='link'>Usuarios registrados</a>
+        <a href="{{route('lista')}}"><p class='link_'>Usuarios registrados</p></a>
 
         <script>
             
@@ -100,24 +99,21 @@
 
             function set_id(id){
                 cont = id
-                //alert("modal_Btn-"+cont+"")
+             
                 var btn = document.getElementById('modal_Btn-'+cont+'');
-
                 var modal = document.getElementById("myModal-"+cont+"");
                 modal.style.display = "block";
 
                 var span = document.getElementById("close-"+cont+"");
 
-              
-                span.onclick = function() {
+                span.onclick = function() { 
                 modal.style.display = "none";
                 }
-
-                // When the user clicks anywhere outside of the modal, close it
+                
                 window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
                 }
 
                 var registrar = document.getElementById("registrar-"+cont+"");
@@ -135,8 +131,6 @@
                         }
                     });
  
-
-
                     profesor = []
                     var first_name = registrar.getAttribute('nombre')
                     var last_name = registrar.getAttribute('last_name')
@@ -146,9 +140,8 @@
                     profesor.push(email)
 
                     arreglo.push(profesor)
-
-                    //alert(arreglo)
                     console.log(arreglo)
+
                     //ajax
                     $.ajax({
                         url:"{{route('insert')}}",
@@ -171,38 +164,41 @@
                             console.log(status)
 
                             if(status==500){
-
                                 alert('En este momento no se ha podido realizar su solicitud, intente más tarde')
 
                             }else{
-
-                                alert('su solicitud no fue procesada :c')
-
+                               alert('su solicitud no fue procesada :c')
                             }
                         }
                     });//fin_ajax
 
                 }
 
-                
-
-
-
-            }
-
-            //**fin_MODAL**//
+            }//**fin_MODAL**//
             
             $(document).ready(function() {
                 
                 $('#myTable tfoot th').each( function (i) {
                     var title = $('#myTable thead th').eq( $(this).index() ).text();
-                    $(this).html( '<input type="text" placeholder="Search '+title+'" data-index="'+i+'" />' );
-                } );
+                    $(this).html( '<input type="text" placeholder="Búsqueda por '+title+'" data-index="'+i+'" />' );
+                });
             
                 var table = $('#myTable').DataTable( {
 
-                    "lengthMenu": [[6, -1], [6, "All"]]
-                } );
+                    "lengthMenu": [[6, -1], [6, "todos"]],
+                    "language": {
+                        "lengthMenu": "Ver _MENU_ registros por página",
+                        "zeroRecords": "Usuario no encontrado",
+                        "info": "Mostrando página _PAGE_ de _PAGES_",
+                        "infoEmpty": "No records available",
+                        "infoFiltered": "(filtered from _MAX_ total records)",
+                        "search":"Búsqueda",
+                        "paginate": {
+                            "previous": "página previa",
+                            "next":"página siguiente"
+                        }
+                    }
+                });
             
                 // Filter 
                 $( table.table().container() ).on( 'keyup', 'tfoot input', function () {
@@ -211,8 +207,9 @@
                         .search( this.value )
                         .draw();
                 });
-
-   
+        
+                //var next = document.getElementById('myTable_next')
+                
             });
 
         </script>
