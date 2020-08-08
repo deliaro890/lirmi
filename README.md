@@ -18,11 +18,14 @@ Pasos:
 
 1. Para la base de datos, en postgres:
     - Crear un usuario con password: 
-        # CREATE ROLE newuser WITH LOGIN PASSWORD 'password';
+        CREATE ROLE newuser WITH LOGIN PASSWORD 'password';
+
     - A dicho usuario darle permisos para crear una base de datos:
-        # ALTER ROLE newuser CREATEDB;
+        ALTER ROLE newuser CREATEDB;
+
     - Crear una database con dicho usuario
-        # CREATE DATABASE colegio WITH OWNER  newuser;
+        CREATE DATABASE colegio WITH OWNER  newuser;
+        
     - Reiniciar postgres
 
 2. Descargar el repositorio de github
