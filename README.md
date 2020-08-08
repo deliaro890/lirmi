@@ -1,6 +1,6 @@
 Prueba Lirmi
 
-Este proyecto es una prueba técnica en donde se utilizó el framework laravel 7 y postgres como database. Consiste en mostrar una tabla con datos de profesores, dicha información fue consumida de una API, y organizada en forma de tabla. Cada profesor es susceptible a ser registrado en la base de datos del proyecto en cuestión.
+Este proyecto es una prueba técnica en donde se utilizó el framework laravel 7 y postgres. Consiste en mostrar una tabla con datos de profesores, dicha información fue consumida de una API, y organizada en forma de tabla. Cada profesor es susceptible a ser registrado en la base de datos del proyecto en cuestión.
 
 La segunda vista es una tabla con los profesores registrados en la base de datos, donde cada uno puede ser eliminado de dicha tabla.
 
@@ -25,7 +25,7 @@ Pasos:
 
     - Crear una database con dicho usuario
         CREATE DATABASE colegio WITH OWNER  newuser;
-        
+
     - Reiniciar postgres
 
 2. Descargar el repositorio de github
